@@ -1,0 +1,44 @@
+.mainTxt {
+  padding-top: 50px;
+  color: green;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+
+.slogan {
+  color: orange;
+  font-size: 20px;
+  text-align: center;
+}
+
+.mogHubLogo {
+  height: 350px;
+  width: 350px;
+  padding-top: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputFlex {
+  flex-direction: row;
+  margin-top: 25px;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+
+.inputTxt {
+  color: black;
+}
+
+.userInputTxt {
+  border-width: 1px;
+  border-color: gray;
+  padding: 8px;
+  margin-top: 8px;
+  border-bottom-width: 1px;
+}
+
+.enterTxt {
+  font-weight: bold;
+}
