@@ -1,8 +1,16 @@
-import {StatusBar} from 'expo-status-bar';
-import { Text, TextInput, View, Image, SafeAreaView, ScrollView,Button} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import {
+  Text,
+  TextInput,
+  View,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Button
+} from 'react-native';
 import { RadioButton } from 'react-native-paper';
-import {useState} from 'react';
-import styles from './Styles'
+import { useState } from 'react';
+import styles from './Styles';
 
 function MainScreen() {
 
@@ -10,102 +18,188 @@ function MainScreen() {
   const [selectedValue, setSelectedValue] = useState('0');
   const [pet, setPet] = useState<string[]>([]);
 
+
   const renderPets = () => {
     const arrDisplay = [];
 
-    for(let i=0; i < pet.length; i++){
+    for (let i = 0; i < pet.length; i++) {
       arrDisplay.push(
-        <View key={1} style={styles.inputContainer}>
-          <text style={styles.petTxt}>
+        <View key={i} style={styles.inputContainer}>
+          <Text style={styles.petTxt}>
             {pet[i]}
-          </text>
+          </Text>
         </View>
       );
     }
+
     return arrDisplay;
-  }
+  };
+
 
   return (
     <View>
       <SafeAreaView>
         <ScrollView>
+
           <Image
             style={styles.mogHubLogo}
             source={require('../assets/Images/cat-logo.jpg')}
           />
-          <Text style={styles.mainTxt}>Mog Hub</Text>
-          <Text style={styles.slogan}>Purrfect companions</Text>
+
+          <Text style={styles.mainTxt}>
+            Mog Hub
+          </Text>
+
+          <Text style={styles.slogan}>
+            Purrfect companions
+          </Text>
+
 
           <View style={styles.inputFlex}>
-            <Text style={styles.inputTxt}>Name your Pet:</Text>
+
+            <Text style={styles.inputTxt}>
+              Name your Pet:
+            </Text>
+
             <TextInput
               style={styles.userInputTxt}
               placeholder="Mog"
               value={petName}
               onChangeText={(newText) => setPetName(newText)}
             />
+
           </View>
-          <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18}}>
-              Select your Pet</Text>
-            
+
+
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+
+            <Text
+              style={{
+                fontWeight: 'bold',
+                fontSize: 18
+              }}
+            >
+              Select your Pet
+            </Text>
+
+
             <View style={styles.radiocontainer}>
+
               <View style={styles.radioGroup}>
 
-                {/*radio button for cat*/}
+                {/* radio button for cat */}
                 <View style={styles.radioBtn}>
+
                   <RadioButton.IOS
-                     value="1"
-                     status={selectedValue == "1" ? 'checked' : 'unchecked'}
-                     onPress={() => setSelectedValue('1')}
-                     color='orange'
+                    value="1"
+                    status={
+                      selectedValue == "1"
+                        ? 'checked'
+                        : 'unchecked'
+                    }
+                    onPress={() => setSelectedValue('1')}
+                    color="orange"
                   />
-                  <Text style={styles.radioLabel}>Cat</Text>
+
+                  <Text style={styles.radioLabel}>
+                    Cat
+                  </Text>
+
                 </View>
 
-                {/*radio button for dog*/}
+
+                {/* radio button for dog */}
                 <View style={styles.radioBtn}>
+
                   <RadioButton.IOS
-                     value="2"
-                     status={selectedValue == "2" ? 'checked' : 'unchecked'}
-                     onPress={() => setSelectedValue('2')}
-                     color='orange'
+                    value="2"
+                    status={
+                      selectedValue == "2"
+                        ? 'checked'
+                        : 'unchecked'
+                    }
+                    onPress={() => setSelectedValue('2')}
+                    color="orange"
                   />
-                  <Text style={styles.radioLabel}>Dog</Text>
+
+                  <Text style={styles.radioLabel}>
+                    Dog
+                  </Text>
+
                 </View>
 
-                {/*radio button for other*/}
+
+                {/* radio button for other */}
                 <View style={styles.radioBtn}>
+
                   <RadioButton.IOS
-                     value="3"
-                     status={selectedValue == "3" ? 'checked' : 'unchecked'}
-                     onPress={() => setSelectedValue('3')}
-                     color='orange'
+                    value="3"
+                    status={
+                      selectedValue == "3"
+                        ? 'checked'
+                        : 'unchecked'
+                    }
+                    onPress={() => setSelectedValue('3')}
+                    color="orange"
                   />
-                  <Text style={styles.radioLabel}>Other</Text>
+
+                  <Text style={styles.radioLabel}>
+                    Other
+                  </Text>
+
                 </View>
+
               </View>
+
             </View>
+
           </View>
 
-          <Button title="Add Pet"
+
+          <Button
+            title="Add Pet"
             onPress={() => {
-              setPet([...pet,petName]);
-              setPetName("");
+
+              let petType = '';
+
+              if (selectedValue === '1') {
+                petType = 'Cat';
+              }
+              else if (selectedValue === '2') {
+                petType = 'Dog';
+              }
+              else if (selectedValue === '3') {
+                petType = 'Other';
+              }
+
+              if (petName.trim() !== '' && petType !== '') {
+
+                setPet([
+                  ...pet,
+                  `${petName}: ${petType}`
+                ]);
+
+                setPetName('');
+                setSelectedValue('0');
+              }
+
             }}
           />
+
+
           <View style={styles.petContainer}>
             {renderPets()}
           </View>
+
         </ScrollView>
       </SafeAreaView>
     </View>
   );
 }
 
-export default MainScreen
-
-
-
-
-
+export default MainScreen;
